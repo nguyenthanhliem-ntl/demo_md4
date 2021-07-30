@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Create city</title>
+    <style>
+        body{
+            margin-left: 650px;
+        }
+    </style>
+</head>
+<body>
+<h1>Thêm sản phẩm</h1>
+<p>
+    <a href="/product" style="margin:auto">Danh sách sản phẩm</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create-product}" th:object="${product}" method="post">
+    <table class="table-responsive">
+        <tr>
+            <td>Tên sản phẩm</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Giá</td>
+            <td><input type="number" th:field="*{price}"></td>
+        </tr>
+        <tr>
+            <td>Số lượng</td>
+            <td><input type="number" th:field="*{num}"></td>
+        </tr>
+        <tr>
+            <td>Màu sắc</td>
+            <td><input type="text" th:field="*{color}"></td>
+        </tr>
+        <tr>
+            <td>Danh mục</td>
+            <td><select th:field="*{category}">
+                <option th:each="category :${categories}" th:value=" ${category.id}" th:text="${category.name}"></option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Thêm"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
