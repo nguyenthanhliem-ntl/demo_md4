@@ -4,6 +4,8 @@ import com.example.demo.model.Product;
 import com.example.demo.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +67,7 @@ public class CateContro {
        productService.save(product);
        ModelAndView modelAndView = new ModelAndView("/product/edit");
        modelAndView.addObject("product",product);
-       modelAndView.addObject("massage","Thay đổi thành công !");
+       modelAndView.addObject("message","Thay đổi thành công !");
        return modelAndView;
    }
 
@@ -86,8 +88,12 @@ public class CateContro {
        public String deleteProduct(@ModelAttribute ("product") Product product){
            productService.remote(product.getId());
            return "redrect:product";
-
-
-
    }
+    @PostMapping("/validateUser")
+    public ModelAndView checkValidation(@Validated @ModelAttribute("product") Product product, BindingResult bindingResult){
+        if(bindingResult.hasFieldErrors()){
+            return new ModelAndView("/create-product");
+        }
+        return new ModelAndView("/create-product");
+    }
 }
