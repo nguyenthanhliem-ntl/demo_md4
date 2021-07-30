@@ -28,7 +28,7 @@
                 <th>Màu sắc</th>
                 <th>Action</th>
             </tr>
-            <th:block th:each="product,seriable :${producter}">
+            <th:block th:each="product,seriable :${product}">
                 <tr>
                     <th th:text="${seriable.count}"></th>
                     <th th:text="${product.name}"></th>

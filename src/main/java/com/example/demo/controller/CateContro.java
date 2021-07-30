@@ -26,14 +26,14 @@ public class CateContro {
 
    @GetMapping("/product")
     public ModelAndView showListProduct(){
-       Iterable<Product> producter = productService.findAll();
+       Iterable<Product> product = productService.findAll();
        ModelAndView modelAndView = new ModelAndView("/product/list");
-       modelAndView.addObject("producter",producter);
+       modelAndView.addObject("product",product);
        return modelAndView;
    }
 
 
-   @GetMapping("/crete-product")
+   @GetMapping("/create-product")
     public ModelAndView showAddProduct(){
        ModelAndView modelAndView = new ModelAndView("/product/create");
        modelAndView.addObject("product",new Product());
